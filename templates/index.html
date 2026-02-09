@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome - MyApp{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Welcome</h2>
+    <p class="subtitle">Secure authentication with Flask</p>
+    <div class="links">
+        <a href="{{ url_for('login') }}" class="btn-primary"
+            style="display:inline-block; box-sizing:border-box; text-decoration:none;">Login</a>
+        <br><br>
+        <a href="{{ url_for('register') }}">Don't have an account? Register</a>
+    </div>
+</div>
+{% endblock %}
