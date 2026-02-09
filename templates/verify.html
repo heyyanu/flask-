@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Verify Account - MyApp{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Verify Account</h2>
+    <p class="subtitle">Enter the 6-digit code sent to your email</p>
+
+    {% if error %}
+    <div class="alert alert-error">{{ error }}</div>
+    {% endif %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('verify_code') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <div class="form-group">
+            <label for="code">Verification Code</label>
+            <input type="text" id="code" name="code" placeholder="123456"
+                style="letter-spacing: 0.5em; text-align: center; font-size: 1.5em;" required>
+        </div>
+
+        <button type="submit" class="btn-primary">Verify</button>
+    </form>
+
+    <div class="links">
+        <p>Didn't receive code? <a href="{{ url_for('register') }}">Try registering again</a></p>
+    </div>
+</div>
+{% endblock %}
